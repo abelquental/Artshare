@@ -1,414 +1,618 @@
 $fontsizeFallback: 1rem;
 $fontsize: calc(1.1*(1.5vw+1vh));
-
-$fontsizeFallback2: calc(1.6*(#{$fontsizeFallback}));
+$fontsizeFallback2: calc(1.55*(#{$fontsizeFallback}));
 $fontsize2: calc(1*(#{$fontsize}));
-
-$fontsizeFallback3: calc(3.5*(#{$fontsizeFallback}));
-$fontsize3: calc(2.2*(#{$fontsize}));
-
-
+$fontsizeFallback3: calc(2.8*(#{$fontsizeFallback}));
+$fontsize3: calc(1.8*(#{$fontsize}));
 $lineheightFallback: calc(1.1*(#{$fontsizeFallback}));
 $lineheight: calc(1.05*(#{$fontsize}));
 $lineheightFallback2: calc(1.010*(#{$fontsizeFallback2}));
 $lineheight2: calc(0.910*(#{$fontsize2}));
 $lineheightFallback3: calc(0.910*(#{$fontsizeFallback3}));
 $lineheight3: calc(0.910*(#{$fontsize3}));
-
-
 $pink: rgb(255, 0, 255);
 $white: white;
-
 @mixin typesize1 {
-  font-size: $fontsizeFallback3;
-  line-height: $lineheightFallback3;
-  font-size: $fontsize3;
-  line-height: $lineheight3;
+    font-size: $fontsizeFallback3;
+    line-height: $lineheightFallback3;
+    font-size: $fontsize3;
+    line-height: $lineheight3;
 }
 
 @mixin typesize2 {
-  font-size: $fontsizeFallback2;
-  line-height: $lineheightFallback2;
-  font-size: $fontsize2;
-  line-height: $lineheight2;
+    font-size: $fontsizeFallback2;
+    line-height: $lineheightFallback2;
+    font-size: $fontsize2;
+    line-height: $lineheight2;
 }
 
-
-
 html {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 body {
-  width: 100%;
-  height: 100%;
-  background-color: $white;
-  background-image: url("images/dot.png");
-  background-size: 2.5%;
-  scroll-behavior: smooth;
-  background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+    background-size: 2.5%;
+    scroll-behavior: smooth;
+    background-attachment: fixed;
+    font-family: neue-haas-unica, sans-serif;
+    font-weight: 400;
 }
-
-@font-face {
-    font-family: 'suisse';
-    src: url("tipos.otf");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-  font-family: 'suisse';
-  src: url("tipos-i.otf");
-  font-weight: normal;
-  font-style: italic;
-}
-
 
 //////////////////////////////////////////////////////// INFO
-
 .info-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  z-index: 2;
-  font-family: "Suisse", Arial, Helvetica, sans-serif;
-  z-index: 0;
-  padding: 0;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    z-index: 2;
+    font-family: neue-haas-unica, sans-serif;
+    z-index: 0;
+    padding: 0;
+    color: rgb(0, 255, 0);
 }
 
-.local p, .slogan p {
-  margin: 0;
+h1 {
+    font-family: neue-haas-unica, sans-serif;
+    font-weight: 500;
+    border-style: solid;
+    border-width: 1px;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-color: rgb(0, 255, 0);
+}
+
+.local p,
+.slogan p {
+    margin: 0;
 }
 
 //////////////////////////// 1
-
-#info-container-1.info-container h1, 
+#info-container-1.info-container h1,
 #info-container-1.info-container .slogan,
-#info-container-1.info-container .local {
-  @include typesize1;
-  text-transform: uppercase;
-  padding: 1vw;
-  margin: 0;
+#info-container-1.info-container .time-local-container {
+    @include typesize1;
+    text-transform: uppercase;
+    padding: 1vw;
+    margin: 0;
 }
 
-#info-container-1.info-container h1 img{
-  height: calc(0.75 * (0.5 * #{$fontsizeFallback3}));
-  height: calc(0.75 * (0.5 * #{$fontsize3}));
+#info-container-1.info-container h1 img {
+    height: calc(0.75 * (0.5 * #{$fontsizeFallback3}));
+    height: calc(0.75 * (0.5 * #{$fontsize3}));
 }
 
-#info-container-1.info-container h1, 
+#info-container-1.info-container h1,
 #info-container-1.info-container .slogan,
-#info-container-1.info-container .local {
-  @include typesize1;
-  text-transform: uppercase;
-  padding: 1vw;
-  margin: 0;
+#info-container-1.info-container .time-local-container {
+    @include typesize1;
+    text-transform: uppercase;
+    padding: 1vw;
+    margin: 0;
 }
 
-#info-container-1.info-container h1 img{
-  height: calc(0.75 * (1 * #{$fontsizeFallback3}));
-  height: calc(0.75 * (1 * #{$fontsize3}));
+#info-container-1.info-container h1 img {
+    height: calc(0.75 * (1 * #{$fontsizeFallback3}));
+    height: calc(0.75 * (1 * #{$fontsize3}));
 }
-
 
 #info-container-1.info-container h1 {
-  grid-column: 1 / 6;
-  grid-row: 1 / 2;
+    grid-column: 1 / 6;
+    grid-row: 1 / 2;
 }
 
-#info-container-1.info-container .slogan{
-  grid-column: 1 / 6;
-  grid-row: 3 / 4;
+#info-container-1.info-container .windows-container-1,
+#info-container-1.info-container .windows-container-2 {
+    grid-column: 1 / 6;
+    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
-#info-container-1.info-container .local {
-  grid-column: 2 / 6;
-  grid-row: 4 / 5;
-  align-self: end;
+.windows-container-1 .window {
+    background-color: rgb(0, 0, 255);
+    height: 40vw;
+    width: 40vw;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(0, 255, 0);
+    box-shadow: 0px 0px 12vw 4vw rgb(0, 0, 255);
+    z-index: 0;
 }
 
-#info-container-1.info-container .slogan p{
-  text-indent: calc(-0.5 * #{$fontsizeFallback3});
-  margin-left: calc(0.5 * #{$fontsizeFallback3});
-  text-indent: calc(-0.5 * #{$fontsize3});
-  margin-left: calc(0.5 * #{$fontsize3});
+.windows-container-2 .window {
+    background-size: cover;
+    height: 40vw;
+    width: 40vw;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(0, 255, 0);
+    box-shadow: 0px 0px 15vw 6vw rgb(0, 255, 0);
+    transition: 0.4s ease-in-out;
+    opacity: 0;
+    z-index: 1;
 }
 
-
-//////////////////////////// 2
-
-#info-container-2.info-container h1, 
-#info-container-2.info-container .slogan,
-#info-container-2.info-container .local {
-  @include typesize2;
-  text-transform: uppercase;
-  padding: 1vw;
-  margin: 0;
+#window-1 {
+    background-image: url("images/lab.png");
 }
 
-#info-container-2.info-container h1 img{
-  height: calc(0.75 * (1 * #{$fontsizeFallback2}));
-  height: calc(0.75 * (1 * #{$fontsize2}));
+#window-2 {
+    background-image: url("images/oculos.png");
 }
 
-
-#info-container-2.info-container h1 {
-  grid-column: 1 / 6;
-  grid-row: 1 / 2;
+.windows-container-2 .window:hover {
+    box-shadow: 0px 0px 15vw 9vw rgb(0, 255, 0);
+    opacity: 1;
 }
 
-#info-container-2.info-container .slogan{
-  grid-column: 2 / 5;
-  grid-row: 2 / 3;
+.windows-container-line {
+    grid-column: 1 / 6;
+    grid-row: 2 / 3;
+    border-style: solid;
+    border-width: 1px;
+    border-right: 0;
+    border-left: 0;
+    border-color: rgb(0, 255, 0);
 }
 
-#info-container-2.info-container .local {
-  grid-column: 4 / 6;
-  grid-row: 3 / 4;
-  align-self: end;
+.window-line {
+    grid-column: 1 / 6;
+    grid-row: 2 / 3;
+    height: 50%;
+    border-style: solid;
+    border-width: 1px;
+    border-right: 0;
+    border-left: 0;
+    border-top: 0;
+    border-color: rgb(0, 255, 0);
 }
 
-#info-container-2.info-container .slogan p{
-  text-indent: calc(-0.5 * #{$fontsizeFallback2});
-  margin-left: calc(0.5 * #{$fontsizeFallback});
-  text-indent: calc(-0.5 * #{$fontsize2});
-  margin-left: calc(0.5 * #{$fontsize2});
+#info-container-1.info-container .slogan {
+    grid-column: 1 / 6;
+    grid-row: 3 / 4;
+    border-style: solid;
+    border-width: 1px;
+    border-right: 0;
+    border-left: 0;
+    border-color: rgb(0, 255, 0);
 }
 
+#info-container-1.info-container .time-local-container {
+    grid-column: 1 / 6;
+    grid-row: 4 / 5;
+    align-self: end;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-style: solid;
+    border-width: 1px;
+    border-right: 0;
+    border-left: 0;
+    border-top: 0;
+    border-color: rgb(0, 255, 0);
+}
 
-
-
-
-
+.local-container {
+    display: flex;
+    flex-direction: row;
+    @include typesize2;
+    align-items: flex-end;
+}
 
 //////////////////////// SINOPSE
-
 .p-container p {
-  padding: 1vw;
-  margin: 0;
+    padding: 1vw;
+    margin: 0;
 }
-
 
 .p-container {
-  @include typesize2;
-  margin-top: 100%;
-  margin-top: 100vh;
-  padding-top: 10%;
-  padding-top: 10vh;
-  width: 100vw;
-  // height: 100vh;
-  // background-color: $white;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  line-height: $lineheight;
-  font-family: "Suisse", Arial, Helvetica, sans-serif;
-  z-index: 0;
-  
+    @include typesize2;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    line-height: $lineheight;
+    z-index: 0;
+    color: rgb(0, 255, 0);
 }
+
 .p-container p {
-  padding: 1vw;
-  margin: 0;
+    padding: 1vw;
+    margin: 0;
 }
 
 .p-container p:nth-child(1) {
-  grid-column: 1 / 3;
+    grid-column: 1 / 2;
 }
 
 .p-container p:nth-child(2) {
-  grid-column: 3 /6;
-  
+    grid-column: 2 /3;
 }
 
-.p-container p:nth-child(3) {
-  grid-column: 1 /6;
-  justify-self: center;
-  @include typesize1;
-  padding-top: 20%;
-  padding-top: 20vh;
+//////////////////////////////////////////////////////// Mailchimp
+#mc_embed_signup {
+    background-color: blue;
+    border-style: solid;
+    border-width: 1px;
+    border-right: 0;
+    border-left: 0;
+    border-color: rgb(0, 255, 0);
+    font-family: neue-haas-unica, sans-serif;
+    padding: 1vw;
+    color: rgb(0, 255, 0);
 }
 
-
-
-
-
-
-
-
-
-//////////////////////////////////////////////////////// IMAGES
-
-
-.image-container, .image-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  transform-style: preserve-3d;
-  z-index: 2;
+#mc_embed_signup_scroll {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.image {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
-  width: 100%;
-  height: 100%;
+.mc-field-group label {
+    display: none;
 }
 
-//////////////////////////// 1
-
-#image-1 {
-  grid-row: 1 / 4;
-  background-image: url("images/earth5.png");
-  grid-column: 1 / 6;
-  transform: translateZ(450px);
+#mc_embed_signup h2 {
+    @include typesize1;
+    width: 100%;
 }
 
-
-//////////////////////////// 2 & 3
-
-#info-container-2 .image:nth-child(1n), #info-container-3 .image:nth-child(1n) {
-  transform: translateZ(50px);
+.send-mail {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }
 
-#info-container-2 .image:nth-child(2n), #info-container-3 .image:nth-child(2n){
-  transform: translateZ(200px);
+.mc-field-group {
+    width: 100%;
+    height: 100%;
 }
 
-#info-container-2 .image:nth-child(3n), #info-container-3 .image:nth-child(3n) {
-  transform: translateZ(100px);
+.mc-field-group input {
+    width: 100%;
+    margin: 0;
+    background-color: blue;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(0, 255, 0);
+    font-family: neue-haas-unica, sans-serif;
+    padding: 0.5vw;
+    color: rgb(0, 255, 0);
+    @include typesize2;
 }
 
-#info-container-2 .image:nth-child(4n), #info-container-3 .image:nth-child(4n){
-  transform: translateZ(150px);
+.optionalParent {
+    width: auto;
 }
 
-#image-1-1, #image-1-2, #image-1-3, #image-1-4, #image-1-5 {
-  grid-row: 1 / 2;
+.optionalParent input {
+    margin: 0;
+    padding: 1vw;
+    background-color: rgb(0, 255, 0);
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(0, 0, 255);
+    font-family: neue-haas-unica, sans-serif;
+    color: rgb(0, 0, 255);
+    @include typesize2;
 }
 
-#image-2-1, #image-2-2, #image-2-3, #image-2-4, #image-2-5 {
-  grid-row: 2 / 3;
+.optionalParent,
+.optionalParent input,
+.clear.foot,
+.mc-field-group,
+.mc-field-group label,
+.mc-field-group input,
+#mc-embedded-subscribe,
+.clear,
+.foot,
+#sub-button,
+.mc-field-group,
+#mce-EMAIL {
+    height: 100%;
 }
-
-#image-3-1, #image-3-2, #image-3-3, #image-3-4, #image-3-5 {
-  grid-row: 3 / 4;
-}
-
-#image-1-1.image {
-  background-image: url("images/1/earth1.png");
-  grid-column: 1 / 2;
-}
-#image-1-2.image {
-  background-image: url("images/1/earth2.png");
-  grid-column: 2 / 3;
-}
-
-#image-1-3.image  {
-  background-image: url("images/1/earth3.png");
-  grid-column: 3 / 4;
-}
-
-#image-1-4.image  {
-  background-image: url("images/1/earth4.png");
-  grid-column: 4 / 5;
-}
-
-#image-1-5.image  {
-  background-image: url("images/1/earth10.png");
-  grid-column: 5 / 6;
-}
-
-#image-2-1.image  {
-  background-image: url("images/1/earth6.png");
-  grid-column: 1 / 2;
-}
-
-#image-2-2.image  {
-  background-image: url("images/1/earth7.png");
-  grid-column: 2 / 3;
-}
-
-#image-2-3.image  {
-  background-image: url("images/1/earth9.png");
-  grid-column: 3 / 4;
-}
-
-#image-2-4.image  {
-  background-image: url("images/1/earth8.png");
-  grid-column: 4 / 5;
-}
-
-#image-2-5.image  {
-  background-image: url("images/1/earth5.png");
-  grid-column: 5 / 6;
-}
-
-#image-3-1.image  {
-  background-image: url("images/1/earth7.png");
-  grid-column: 1 / 2;
-}
-
-#image-3-2.image  {
-  background-image: url("images/1/earth6.png");
-  grid-column: 2 / 3;
-}
-
-#image-3-3.image  {
-  background-image: url("images/1/earth8.png");
-  grid-column: 3 / 4;
-}
-
-#image-3-4.image  {
-  background-image: url("images/1/earth9.png");
-  grid-column: 4 / 5;
-}
-
-#image-3-5.image  {
-  background-image: url("images/1/earth10.png");
-  grid-column: 5 / 6;
-}
-
-
 
 //////////////////////////////////////////////////////// Logos
-
 .logo-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
-  margin-top: 20%;
-  margin-top: 20vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    margin-top: 1%;
+    margin-bottom: 10%;
+    mix-blend-mode: darken;
 }
 
-#starts, #artshare, #factory{
- width: 100%;
- justify-self: center;
- align-self: center;
- grid-row: 1 / 2;
+#starts,
+#artshare,
+#factory,
+#hub {
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+    grid-row: 1 / 2;
 }
 
 #artshare {
-  grid-column: 1 / 2;
-  align-self: end;
+    grid-column: 1 / 2;
+    align-self: end;
 }
 
 #starts {
-  grid-column: 3 / 5;
+    grid-column: 2 / 3;
 }
 
 #factory {
-  grid-column: 5 / 6;
-  width: 60%;
+    grid-column: 3 / 4;
+    width: 60%;
+}
+
+#hub {
+    grid-column: 4 / 5;
+    width: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+    $fontsizeFallback: 0.6rem;
+    $fontsize: calc(4.5*(1vw+2vh));
+    $fontsizeFallback2: calc(1.8*(#{$fontsizeFallback}));
+    $fontsize2: calc(0.9*(#{$fontsize}));
+    $fontsizeFallback3: calc(2.0*(#{$fontsizeFallback}));
+    $fontsize3: calc(1.1*(#{$fontsize}));
+    $lineheightFallback: calc(1.1*(#{$fontsizeFallback}));
+    $lineheight: calc(1.05*(#{$fontsize}));
+    $lineheightFallback2: calc(1.010*(#{$fontsizeFallback2}));
+    $lineheight2: calc(0.910*(#{$fontsize2}));
+    $lineheightFallback3: calc(0.910*(#{$fontsizeFallback3}));
+    $lineheight3: calc(0.910*(#{$fontsize3}));
+    @mixin typesize1 {
+        font-size: $fontsizeFallback3;
+        line-height: $lineheightFallback3;
+        font-size: $fontsize3;
+        line-height: $lineheight3;
+    }
+    @mixin typesize2 {
+        font-size: $fontsizeFallback2;
+        line-height: $lineheightFallback2;
+        font-size: $fontsize2;
+        line-height: $lineheight2;
+    }
+    .info-container {
+        grid-template-rows: auto auto auto auto auto;
+    }
+    #info-container-1.info-container h1,
+    #info-container-1.info-container .slogan,
+    #info-container-1.info-container .time-local-container {
+        @include typesize1;
+    }
+    #info-container-1.info-container h1 img {
+        height: calc(0.75 * (0.5 * #{$fontsizeFallback3}));
+        height: calc(0.75 * (0.5 * #{$fontsize3}));
+    }
+    #info-container-1.info-container h1,
+    #info-container-1.info-container .slogan,
+    #info-container-1.info-container .time-local-container {
+        @include typesize1;
+    }
+    #info-container-1.info-container h1 img {
+        height: calc(0.75 * (1 * #{$fontsizeFallback3}));
+        height: calc(0.75 * (1 * #{$fontsize3}));
+    }
+    .windows-container-1 .window {
+        display: none;
+    }
+    .windows-container-2 {
+        display: grid;
+        grid-column: 1 / 6;
+        grid-row: 2 / 3;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+    .windows-container-2 .window {
+        height: 80vw;
+        width: 80vw;
+        opacity: 1;
+    }
+    #window-1 {
+        grid-column: 1 / 6;
+        grid-row: 2 / 3;
+        place-self: center;
+        display: none;
+    }
+    #window-2 {
+        grid-column: 1 / 6;
+        grid-row: 5 / 6;
+    }
+    .slogan {
+        grid-column: 1 / 6;
+        grid-row: 3 / 4;
+    }
+    .time-local-container {
+        grid-column: 1 / 6;
+        grid-row: 4 / 5;
+    }
+    .windows-container-line {
+        grid-column: 1 / 6;
+        grid-row: 2 / 3;
+        border-style: solid;
+        border-width: 1px;
+        border-right: 0;
+        border-left: 0;
+        border-color: rgb(0, 255, 0);
+    }
+    .local-container {
+        @include typesize2;
+    }
+    .time-container {
+        @include typesize2;
+    }
+    .p-container {
+        @include typesize2;
+    }
+    .mc-field-group input {
+        @include typesize2;
+    }
+    .optionalParent input {
+        @include typesize2;
+    }
+    .p-container p:nth-child(1) {
+        grid-column: 1 / 3;
+    }
+    .p-container p:nth-child(2) {
+        grid-column: 1 /3;
+    }
+    .local-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    //////////////////////////////////////////////////////// Mailchimp
+    #mc_embed_signup_scroll {
+        flex-direction: column;
+    }
+    #mc_embed_signup h2 {
+        @include typesize1;
+        margin-bottom: 2%;
+    }
+    .mc-field-group input {
+        width: 100%;
+        margin: 0;
+        background-color: blue;
+        border-style: solid;
+        border-width: 1px;
+        border-color: rgb(0, 255, 0);
+        font-family: neue-haas-unica, sans-serif;
+        padding: 1vw;
+        color: rgb(0, 255, 0);
+        @include typesize2;
+    }
+    .optionalParent {
+        width: auto;
+    }
+    .optionalParent input {
+        margin: 0;
+        padding: 2.3vw;
+        background-color: rgb(0, 255, 0);
+        border-style: solid;
+        border-width: 1px;
+        border-color: rgb(0, 0, 255);
+        font-family: neue-haas-unica, sans-serif;
+        color: rgb(0, 0, 255);
+        @include typesize2;
+    }
+    .optionalParent,
+    .optionalParent input,
+    .clear.foot,
+    .mc-field-group,
+    .mc-field-group label,
+    .mc-field-group input,
+    #mc-embedded-subscribe,
+    .clear,
+    .foot,
+    #sub-button,
+    .mc-field-group,
+    #mce-EMAIL {
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    $fontsizeFallback: 0.6rem;
+    $fontsize: calc(4.5*(1vw+2vh));
+    $fontsizeFallback2: calc(1.6*(#{$fontsizeFallback}));
+    $fontsize2: calc(0.9*(#{$fontsize}));
+    $fontsizeFallback3: calc(1.9*(#{$fontsizeFallback}));
+    $fontsize3: calc(1.1*(#{$fontsize}));
+    $lineheightFallback: calc(1.1*(#{$fontsizeFallback}));
+    $lineheight: calc(1.05*(#{$fontsize}));
+    $lineheightFallback2: calc(1.010*(#{$fontsizeFallback2}));
+    $lineheight2: calc(0.910*(#{$fontsize2}));
+    $lineheightFallback3: calc(0.910*(#{$fontsizeFallback3}));
+    $lineheight3: calc(0.910*(#{$fontsize3}));
+    @mixin typesize1 {
+        font-size: $fontsizeFallback3;
+        line-height: $lineheightFallback3;
+        font-size: $fontsize3;
+        line-height: $lineheight3;
+    }
+    @mixin typesize2 {
+        font-size: $fontsizeFallback2;
+        line-height: $lineheightFallback2;
+        font-size: $fontsize2;
+        line-height: $lineheight2;
+    }
+    #info-container-1.info-container h1,
+    #info-container-1.info-container .slogan,
+    #info-container-1.info-container .time-local-container {
+        @include typesize1;
+    }
+    #info-container-1 h1 img {
+        height: calc(0.75 * (0.5 * #{$fontsizeFallback3}));
+        height: calc(0.75 * (0.5 * #{$fontsize3}));
+    }
+    .local-container,
+    .time-container,
+    .p-container,
+    .mc-field-group input,
+    .optionalParent input,
+    #mc_embed_signup h2 {
+        @include typesize2;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    $fontsizeFallback: 0.6rem;
+    $fontsize: calc(4.5*(1vw+2vh));
+    $fontsizeFallback2: calc(1.4*(#{$fontsizeFallback}));
+    $fontsize2: calc(0.9*(#{$fontsize}));
+    $fontsizeFallback3: calc(1.6*(#{$fontsizeFallback}));
+    $fontsize3: calc(1.1*(#{$fontsize}));
+    $lineheightFallback: calc(1.1*(#{$fontsizeFallback}));
+    $lineheight: calc(1.05*(#{$fontsize}));
+    $lineheightFallback2: calc(1.010*(#{$fontsizeFallback2}));
+    $lineheight2: calc(0.910*(#{$fontsize2}));
+    $lineheightFallback3: calc(0.910*(#{$fontsizeFallback3}));
+    $lineheight3: calc(0.910*(#{$fontsize3}));
+    @mixin typesize1 {
+        font-size: $fontsizeFallback3;
+        line-height: $lineheightFallback3;
+        font-size: $fontsize3;
+        line-height: $lineheight3;
+    }
+    @mixin typesize2 {
+        font-size: $fontsizeFallback2;
+        line-height: $lineheightFallback2;
+        font-size: $fontsize2;
+        line-height: $lineheight2;
+    }
+    #info-container-1.info-container h1,
+    #info-container-1.info-container .slogan,
+    #info-container-1.info-container .time-local-container {
+        @include typesize1;
+    }
+    #info-container-1 h1 img {
+        height: calc(0.75 * (0.5 * #{$fontsizeFallback3}));
+        height: calc(0.75 * (0.5 * #{$fontsize3}));
+    }
+    .local-container,
+    .time-container,
+    .p-container,
+    .mc-field-group input,
+    .optionalParent input,
+    #mc_embed_signup h2 {
+        @include typesize2;
+    }
 }
