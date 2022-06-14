@@ -1,173 +1,349 @@
-renderData();
+var offsetHeight = document.getElementById('menu-nav').offsetHeight;
 
-function renderData() {  
-  var heroContent1 = `
-  <div class="image-container" id="image-container-1" data-tilt-full-page-listening>
-    <div class="image" id="image-1"></div>
-  </div>
+(function(document, history, location) {
+    var HISTORY_SUPPORT = !!(history && history.pushState);
 
-  <div class="info-container" id="info-container-1">
-    <h1><img src="images/artshare.svg">Artshare <br> Festival & Conference</h1>
-    <div class="slogan">
-        <p>Hope for the future</p>
-        <p>— Reshaping and reinventing Science <br>& Technology through the Arts</p>
-    </div>
-    <div class="local">
-        <p>21-23.06.2022</p>
-        <p>Factory, HubCreativo do Beato</p>
-        <p>Lisbon, Portugal</p>
-    </div>
-  </div>
-  `;
+    console.log(offsetHeight);
 
-  var heroContent2 = `
-    <div class="image-container" id="image-container-2" data-tilt-full-page-listening>
-      <div class="image" id="image-1-1"></div>
-      <div class="image" id="image-1-4"></div>
-      <div class="image" id="image-1-5"></div>
-      
-      <div class="image" id="image-2-1"></div>
-      <div class="image" id="image-2-3"></div>
-      <div class="image" id="image-2-5"></div>
+    var anchorScrolls = {
+        ANCHOR_REGEX: /^#[^ ]+$/,
+        OFFSET_HEIGHT_PX: offsetHeight,
 
+        /**
+         * Establish events, and fix initial scroll position if a hash is provided.
+         */
+        init: function() {
+            this.scrollToCurrent();
+            window.addEventListener('hashchange', this.scrollToCurrent.bind(this));
+            document.body.addEventListener('click', this.delegateAnchors.bind(this));
+        },
 
-      <div class="image" id="image-3-3"></div>
-      <div class="image" id="image-3-4"></div>
-    </div>
-    <div class="image-container" id="image-container-3" data-tilt-full-page-listening>
-      <div class="image" id="image-1-2"></div>
-      <div class="image" id="image-1-3"></div>
-      
+        /**
+         * Return the offset amount to deduct from the normal scroll position.
+         * Modify as appropriate to allow for dynamic calculations
+         */
+        getFixedOffset: function() {
+            return this.OFFSET_HEIGHT_PX;
+        },
 
-      <div class="image" id="image-2-2"></div>
-      <div class="image" id="image-2-4"></div>
+        /**
+         * If the provided href is an anchor which resolves to an element on the
+         * page, scroll to it.
+         * @param  {String} href
+         * @return {Boolean} - Was the href an anchor.
+         */
+        scrollIfAnchor: function(href, pushToHistory) {
+            var match, rect, anchorOffset;
 
+            if (!this.ANCHOR_REGEX.test(href)) {
+                return false;
+            }
 
-      <div class="image" id="image-3-1"></div>
-      <div class="image" id="image-3-2"></div>
-      <div class="image" id="image-3-5"></div>
-    </div>
+            match = document.getElementById(href.slice(1));
 
-    <div class="info-container" id="info-container-2">
-      <h1><img src="images/artshare.svg">Artshare <br> Festival & Conference</h1>
-      <div class="slogan">
-          <p>Hope for the future</p>
-          <p>— Reshaping and reinventing Science <br>& Technology through the Arts</p>
-      </div>
-      <div class="local">
-          <p>21-23.06.2022</p>
-          <p>Factory, HubCreativo do Beato</p>
-          <p>Lisbon, Portugal</p>
-      </div>
-    </div>
-  `;
+            if (match) {
+                rect = match.getBoundingClientRect();
+                anchorOffset = window.pageYOffset + rect.top - this.getFixedOffset();
+                window.scrollTo(window.pageXOffset, anchorOffset);
 
-  var sinopseContent = `
-    <div class="p-container">
-      <p>Hope is the raw material that gives us purpose and sparks determination towards action. In a world of limited natural resources and a lot of uncertainty about the present and the future, pushing technological and innovation boundaries in order to build a sustainable and resilient world is an urgent necessity and a matter of survival.</p>
-      <p>Artshare Festival & Conference aims to create the space for demonstrating concrete solutions based on the latest technological innovations, discussing ideas, discovering opportunities, fostering networking and collaborations among professionals, innovators and creatives who share the same flame to change and creating a future that meets the needs of present and future generations.</p>
-      <p>More info soon!</p>
-    </div>
-  `;
+                // Add the state to history as-per normal anchor links
+                if (HISTORY_SUPPORT && pushToHistory) {
+                    history.pushState({}, document.title, location.pathname + href);
+                }
+            }
 
- 
-  var logoContent = `
-    <div class="logo-container">
-      <img id="starts" src="images/logos/starts.svg">
-      <img id="artshare" src="images/logos/artshare.svg">
-      <img id="factory" src="images/logos/factory.svg">
-    </div>  
-  `;
+            return !!match;
+        },
 
-  var run = document.getElementById("run");
-  run.insertAdjacentHTML('afterend', logoContent);
-  run.insertAdjacentHTML('afterend', sinopseContent);
-  var i = Math.floor(Math.random() * 2);
-  // console.log(i);
+        /**
+         * Attempt to scroll to the current location's hash.
+         */
+        scrollToCurrent: function() {
+            this.scrollIfAnchor(window.location.hash);
+        },
 
-  if (i >= 1) {
-    run.insertAdjacentHTML('afterend', heroContent1 );
-    // console.log(1);
-  } 
-  else {
-    run.insertAdjacentHTML('afterend', heroContent2 );
-    // console.log(2);
-  };
-  
-}
+        /**
+         * If the click event's target was an anchor, fix the scroll position.
+         */
+        delegateAnchors: function(e) {
+            var elem = e.target;
+
+            if (
+                elem.nodeName === 'A' &&
+                this.scrollIfAnchor(elem.getAttribute('href'), true)
+            ) {
+                e.preventDefault();
+            }
+        }
+    };
+
+    window.addEventListener(
+        'DOMContentLoaded', anchorScrolls.init.bind(anchorScrolls)
+    );
+})(window.document, window.history, window.location);
 
 
-VanillaTilt.init(document.querySelector("#image-container-2"), {
-  reverse:                true,  // reverse the tilt direction
-  max:                    20,     // max tilt rotation (degrees)
-  startX:                 0,      // the starting tilt on the X axis, in degrees.
-  startY:                 0,      // the starting tilt on the Y axis, in degrees.
-  perspective:            1000,   // Transform perspective, the lower the more extreme the tilt gets.
-  scale:                  1,      // 2 = 200%, 1.5 = 150%, etc..
-  speed:                  500,    // Speed of the enter/exit transition
-  transition:             true,   // Set a transition on enter/exit.
-  axis:                   null,   // What axis should be disabled. Can be X or Y.
-  reset:                  true,   // If the tilt effect has to be reset on exit.
-  easing:                 "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
-  glare:                  false,  // if it should have a "glare" effect
-  "max-glare":            1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
-  "glare-prerender":      false,  // false = VanillaTilt creates the glare elements for you, otherwise
-                                  // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
-  "mouse-event-element":  null,   // css-selector or link to HTML-element what will be listen mouse events
-  gyroscope:              true,   // Boolean to enable/disable device orientation detection,
-  gyroscopeMinAngleX:     -45,    // This is the bottom limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the left border of the element;
-  gyroscopeMaxAngleX:     45,     // This is the top limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the right border of the element;
-  gyroscopeMinAngleY:     -45,    // This is the bottom limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the top border of the element;
-  gyroscopeMaxAngleY:     45,     // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
-  
-});
 
-VanillaTilt.init(document.querySelector("#image-container-3"), {
-  reverse:                false,  // reverse the tilt direction
-  max:                    5,     // max tilt rotation (degrees)
-  startX:                 0,      // the starting tilt on the X axis, in degrees.
-  startY:                 0,      // the starting tilt on the Y axis, in degrees.
-  perspective:            1000,   // Transform perspective, the lower the more extreme the tilt gets.
-  scale:                  1,      // 2 = 200%, 1.5 = 150%, etc..
-  speed:                  500,    // Speed of the enter/exit transition
-  transition:             false,   // Set a transition on enter/exit.
-  axis:                   null,   // What axis should be disabled. Can be X or Y.
-  reset:                  true,   // If the tilt effect has to be reset on exit.
-  easing:                 "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
-  glare:                  false,  // if it should have a "glare" effect
-  "max-glare":            1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
-  "glare-prerender":      false,  // false = VanillaTilt creates the glare elements for you, otherwise
-                                  // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
-  "mouse-event-element":  null,   // css-selector or link to HTML-element what will be listen mouse events
-  gyroscope:              true,   // Boolean to enable/disable device orientation detection,
-  gyroscopeMinAngleX:     -45,    // This is the bottom limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the left border of the element;
-  gyroscopeMaxAngleX:     45,     // This is the top limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the right border of the element;
-  gyroscopeMinAngleY:     -45,    // This is the bottom limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the top border of the element;
-  gyroscopeMaxAngleY:     45,     // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
-  
-});
+if (window.location.pathname == '/index.html') {
+    document.querySelector(".info-container").style.marginTop = offsetHeight + "px";
+} else if (window.location.pathname == '/program.html') {
+    document.getElementById("program-wrapper").style.marginTop = offsetHeight + "px";
 
-VanillaTilt.init(document.querySelector("#image-container-1"), {
-reverse:                false,  // reverse the tilt direction
-max:                    13,     // max tilt rotation (degrees)
-startX:                 0,      // the starting tilt on the X axis, in degrees.
-startY:                 0,      // the starting tilt on the Y axis, in degrees.
-perspective:            1000,   // Transform perspective, the lower the more extreme the tilt gets.
-scale:                  1,      // 2 = 200%, 1.5 = 150%, etc..
-speed:                  1000,    // Speed of the enter/exit transition
-transition:             false,   // Set a transition on enter/exit.
-axis:                   null,   // What axis should be disabled. Can be X or Y.
-reset:                  true,   // If the tilt effect has to be reset on exit.
-easing:                 "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
-glare:                  false,  // if it should have a "glare" effect
-"max-glare":            1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
-"glare-prerender":      false,  // false = VanillaTilt creates the glare elements for you, otherwise
-                                // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
-"mouse-event-element":  null,   // css-selector or link to HTML-element what will be listen mouse events
-gyroscope:              true,   // Boolean to enable/disable device orientation detection,
-gyroscopeMinAngleX:     -45,    // This is the bottom limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the left border of the element;
-gyroscopeMaxAngleX:     45,     // This is the top limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the right border of the element;
-gyroscopeMinAngleY:     -45,    // This is the bottom limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the top border of the element;
-gyroscopeMaxAngleY:     45,     // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
+    // Fetch data
+    getData();
+    async function getData() {
+        const response = await fetch('/data.json');
+        const data = await response.json();
+        showList(data);
+    }
 
+    let programList = document.getElementById("program-wrapper");
+
+    // Show initial list
+    function showList(data) {
+        data.forEach((item, i) => {
+
+            let dayList28 = document.getElementById("day-28");
+            let dayList29 = document.getElementById("day-29");
+            let dayList30 = document.getElementById("day-30");
+
+            if (item.day == "28") {
+                dayList28.insertAdjacentHTML(
+                    'beforeend',
+                    `<div data-aos="fade" class="program-list-item" id="program-list-item-${i}">
+                    <div class="session-item">
+                        <div class="hour-location-container">
+                            <div class="hour">${item.hour}</div>
+                            <div class="location">${item.sessionLocation}</div>
+                        </div>
+                        <div class="title-type-container">
+                            <div class="title title-${i}">${item.sessionTitle}</div>
+                            <div class="type type-${i}">${item.sessionType}</div>
+                        </div>
+                        <button class="more more-${i}">more info</button>
+                    </div>
+                    <div id="speaker-container-${i}" class="speaker-container hide"></div>
+                </div>`
+                );
+                for (var speakerCount = 0; speakerCount < item.speakerName.length; speakerCount++) {
+                    document.getElementById("speaker-container-" + i).insertAdjacentHTML(
+                        'beforeend',
+                        `<div data-aos="fade" class="speaker-item" id="speaker-item-${[speakerCount]}">
+                        <div class="speaker-info-container">
+                            <a href="${item.speakerLink[speakerCount]}" target="_blank" class="name">${item.speakerName[speakerCount]}</a>
+                            <div class="position">${item.speakerPosition[speakerCount]}</div>
+                            <div class="bio">${item.speakerBio[speakerCount]}</div>
+                        </div>
+                        <div class="photo" style="background-image: url(${item.speakerPhoto[speakerCount]})"></div>
+                    </div>`
+                    );
+                }
+
+                var typeDiv = document.querySelector(".type-" + i);
+                var titleDiv = document.querySelector(".title-" + i);
+
+                if (typeDiv.textContent === "0") {
+                    titleDiv.classList.add("no-type");
+                    typeDiv.style.display = "none";
+                } else {
+                    console.log(typeDiv + "do not delete");
+                }
+
+                var moreBtn = document.querySelector(".more-" + i);
+                var speakerDiv = document.getElementById("speaker-container-" + i);
+
+                function showSpeaker() {
+                    // console.log(speakerDiv);
+                    speakerDiv.classList.toggle("hide");
+
+
+                    if (speakerDiv.classList.contains("hide")) {
+                        moreBtn.textContent = "more info";
+                    } else {
+                        moreBtn.textContent = "close";
+                    }
+
+                }
+
+
+                moreBtn.addEventListener("click", showSpeaker);
+
+
+
+
+
+            } else if (item.day == "29") {
+                dayList29.insertAdjacentHTML(
+                    'beforeend',
+                    `<div data-aos="fade" class="program-list-item" id="program-list-item-${i}">
+                    <div class="session-item">
+                        <div class="hour-location-container">
+                            <div class="hour">${item.hour}</div>
+                            <div class="location">${item.sessionLocation}</div>
+                        </div>
+                        <div class="title-type-container">
+                            <div class="title title-${i}">${item.sessionTitle}</div>
+                            <div class="type type-${i}">${item.sessionType}</div>
+                        </div>
+                        <button class="more more-${i}">more info</button>
+                    </div>
+                    <div id="speaker-container-${i}" class="speaker-container hide"></div>
+                </div>`
+                );
+                for (var speakerCount = 0; speakerCount < item.speakerName.length; speakerCount++) {
+                    document.getElementById("speaker-container-" + i).insertAdjacentHTML(
+                        'beforeend',
+                        `<div data-aos="fade" class="speaker-item" id="speaker-item-${[speakerCount]}">
+                        <div class="speaker-info-container">
+                            <a href="${item.speakerLink[speakerCount]}" target="_blank" class="name">${item.speakerName[speakerCount]}</a>
+                            <div class="position">${item.speakerPosition[speakerCount]}</div>
+                            <div class="bio">${item.speakerBio[speakerCount]}</div>
+                        </div>
+                        <div class="photo" style="background-image: url(${item.speakerPhoto[speakerCount]})"></div>
+                    </div>`
+                    );
+                }
+
+                var typeDiv = document.querySelector(".type-" + i);
+                var titleDiv = document.querySelector(".title-" + i);
+
+                if (typeDiv.textContent === "0") {
+                    titleDiv.classList.add("no-type");
+                    typeDiv.style.display = "none";
+                } else {
+                    console.log(typeDiv + "do not delete");
+                }
+
+                var moreBtn = document.querySelector(".more-" + i);
+                var speakerDiv = document.getElementById("speaker-container-" + i);
+
+                function showSpeaker() {
+                    // console.log(speakerDiv);
+                    speakerDiv.classList.toggle("hide");
+
+
+                    if (speakerDiv.classList.contains("hide")) {
+                        moreBtn.textContent = "more info";
+                    } else {
+                        moreBtn.textContent = "close";
+                    }
+
+                }
+
+
+                moreBtn.addEventListener("click", showSpeaker);
+
+
+
+            } else {
+                dayList30.insertAdjacentHTML(
+                    'beforeend',
+                    `<div data-aos="fade" class="program-list-item" id="program-list-item-${i}">
+                    <div class="session-item">
+                        <div class="hour-location-container">
+                            <div class="hour">${item.hour}</div>
+                            <div class="location">${item.sessionLocation}</div>
+                        </div>
+                        <div class="title-type-container">
+                            <div class="title title-${i}">${item.sessionTitle}</div>
+                            <div class="type type-${i}">${item.sessionType}</div>
+                        </div>
+                        <button class="more more-${i}">more info</button>
+                    </div>
+                    <div id="speaker-container-${i}" class="speaker-container hide"></div>
+                </div>`
+                );
+                for (var speakerCount = 0; speakerCount < item.speakerName.length; speakerCount++) {
+                    document.getElementById("speaker-container-" + i).insertAdjacentHTML(
+                        'beforeend',
+                        `<div class="speaker-item" id="speaker-item-${[speakerCount]}">
+                        <div class="speaker-info-container">
+                            <a href="${item.speakerLink[speakerCount]}" target="_blank" class="name">${item.speakerName[speakerCount]}</a>
+                            <div class="position">${item.speakerPosition[speakerCount]}</div>
+                            <div class="bio">${item.speakerBio[speakerCount]}</div>
+                        </div>
+                        <div class="photo" style="background-image: url(${item.speakerPhoto[speakerCount]})"></div>
+                    </div>`
+                    );
+                }
+
+                var typeDiv = document.querySelector(".type-" + i);
+                var titleDiv = document.querySelector(".title-" + i);
+
+                if (typeDiv.textContent === "0") {
+                    titleDiv.classList.add("no-type");
+                    typeDiv.style.display = "none";
+                } else {
+                    console.log(typeDiv + "do not delete");
+                }
+
+                var moreBtn = document.querySelector(".more-" + i);
+                var speakerDiv = document.getElementById("speaker-container-" + i);
+
+                function showSpeaker() {
+                    // console.log(speakerDiv);
+                    speakerDiv.classList.toggle("hide");
+
+
+                    if (speakerDiv.classList.contains("hide")) {
+                        moreBtn.textContent = "more info";
+                    } else {
+                        moreBtn.textContent = "close";
+                    }
+
+                }
+
+
+                moreBtn.addEventListener("click", showSpeaker);
+
+            };
+
+            // programList.insertAdjacentHTML(
+            //     'beforeend',
+            //     `<div data-aos="fade" class="program-list-item" id="program-list-item-${i}">
+            //         <div class="hour">${item.hour}</div> 
+            //     <div class="listed-project" id="proj-${i}">${item.speakerName[speakerCount]}</div>
+
+            //       </div>`
+            // );
+
+
+
+
+
+            //     `<div data-aos="fade" class="program-list-item" id="program-list-item-${i}">
+            //     <div class="hour">${item.hour}</div> 
+            // <div class="listed-project" id="proj-${i}">${item.speakerName[speakerCount]}</div>
+
+            //   </div>`
+
+
+
+
+        });
+    }
+
+
+} else if (window.location.pathname == '/concept.html') {
+    document.querySelector(".info-container").style.marginTop = offsetHeight + "px";
+} else {
+    document.querySelector(".info-container").style.marginTop = offsetHeight + "px";
+};
+
+AOS.init({
+    disable: false,
+    startEvent: 'DOMContentLoaded',
+    initClassName: 'aos-init',
+    animatedClassName: 'aos-animate',
+    useClassNames: false,
+    disableMutationObserver: false,
+    debounceDelay: 0,
+    throttleDelay: 99,
+    offset: 0,
+    delay: 20,
+    duration: 1000,
+    easing: 'ease',
+    once: false,
+    mirror: false,
+    anchorPlacement: 'top-left',
 });

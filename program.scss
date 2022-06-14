@@ -33,247 +33,34 @@ $white: white;
     border-bottom: 1px solid rgb(0, 255, 0);
 }
 
-html {
-    width: 100%;
-    height: 100%;
-    scroll-behavior: smooth;
-}
-
-body {
-    width: 100%;
-    height: 100%;
-    background-color: blue;
-    background-size: 2.5%;
-    scroll-behavior: smooth;
-    background-attachment: fixed;
-    font-family: neue-haas-unica, sans-serif;
-    font-weight: 400;
-}
-
-body {
-    overflow-x: hidden;
-}
-
-a {
-    text-decoration: none;
-    color: rgb(0, 255, 0);
-}
-
-a:hover {
-    text-decoration: underline 1px;
-}
-
-//////////////////////////////////////////////////////// FOOTER
-///////////////////////// Social/Newsletter
-.social-newsletter-container {
-    display: flex;
-    flex-direction: row;
-    background-color: blue;
-    border-bottom: solid rgb(0, 255, 0) 1px;
-    border-top: solid rgb(0, 255, 0) 1px;
-    font-family: neue-haas-unica, sans-serif;
-    color: rgb(0, 255, 0);
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10%;
-}
-
-////// Newsletter
-.newsletter {
-    display: flex;
-    flex-direction: row;
-    width: 50%;
-    background-color: blue;
-    font-family: neue-haas-unica, sans-serif;
+//////////////////////////////////////////////////////// MENU
+///////////////////////// Programa
+.program-nav-wrapper {
+    @include typesize1;
+    @include bluebar;
     padding: 1vw;
-    color: rgb(0, 255, 0);
-    align-items: center;
-    justify-content: space-between;
-    border-left: solid rgb(0, 255, 0) 1px;
+    display: flex;
+    flex-direction: row;
 }
 
-.newsletter h2 {
-    @include typesize2;
-}
-
-.newsletter a {
-    @include typesize2;
+.program-nav-wrapper a {
     text-transform: uppercase;
+    margin-right: 1vw;
+    z-index: 1;
     text-decoration: none;
-    background-color: rgb(0, 0, 255);
     color: rgb(0, 255, 0);
+    border-radius: 2vw;
     border: solid rgb(0, 255, 0) 1px;
-    padding: 0.7vw;
+    padding: 0.5vw;
     padding-left: 1vw;
     padding-right: 1vw;
-    border-radius: 2vw;
+    padding-bottom: 0.8vw;
 }
 
-.newsletter a:hover {
+.program-nav-wrapper a:hover {
     background-color: rgb(0, 255, 0);
     color: rgb(0, 0, 255);
     cursor: pointer;
-}
-
-////// Social
-.social {
-    display: flex;
-    flex-direction: row;
-    width: 50%;
-    padding: 1vw;
-}
-
-.social a {
-    @include typesize2;
-    margin-right: 1vw;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: rgb(0, 255, 0);
-    font-weight: 500;
-}
-
-.social a:hover {
-    text-decoration: underline;
-}
-
-///////////////////////// Logos
-.logo-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding-top: 1%;
-    padding-bottom: 3%;
-    background-color: rgb(0, 0, 255);
-}
-
-#starts,
-#artshare,
-#factory,
-#hub,
-.logo-container a {
-    display: flex;
-    width: 100%;
-    justify-self: center;
-    align-self: center;
-    justify-content: center;
-    grid-row: 1 / 2;
-}
-
-#factory {
-    width: 50%;
-}
-
-#hub {
-    width: 50%;
-}
-
-//////////////////////////////////////////////////////// MENU
-///////////////////////// Geral
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-}
-
-///////////////////////// Logo
-#artshare-logo-btn {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    @include typesize1;
-    font-family: neue-haas-unica, sans-serif;
-    font-weight: 500;
-    text-transform: uppercase;
-    color: rgb(0, 255, 0);
-    background-color: rgb(0, 0, 255);
-    border-bottom: 1px solid rgb(0, 255, 0);
-    padding: 1vw;
-    align-items: end;
-}
-
-#artshare-title {
-    @include typesize1;
-    font-family: neue-haas-unica, sans-serif;
-    font-weight: 500;
-    text-transform: uppercase;
-    text-decoration: none!important;
-    border: none;
-}
-
-#artshare-logo {
-    height: calc(1.6 * (0.5 * #{$fontsizeFallback3}));
-    height: calc(1.6 * (0.5 * #{$fontsize3}));
-    margin-right: 0.5vw;
-}
-
-///////////////////////// Menu Principal
-.menu-container {
-    display: flex;
-    flex-direction: row;
-    @include bluebar;
-    text-transform: uppercase;
-    padding: 1vw;
-    justify-content: space-between;
-    cursor: pointer;
-}
-
-.menu-container a {
-    @include typesize2;
-    font-family: neue-haas-unica, sans-serif;
-    font-weight: 500;
-    text-transform: uppercase;
-    color: rgb(0, 255, 0);
-    text-decoration: none;
-}
-
-.menu-container a:hover {
-    text-decoration: underline 1px;
-}
-
-#ticket {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-#program {
-    margin-right: 1vw;
-}
-
-.circle {
-    border: 1px solid rgb(0, 255, 0);
-    height: calc(1.3 * (0.5 * #{$fontsizeFallback2}));
-    height: calc(1.3 * (0.5 * #{$fontsize2}));
-    width: calc(1.3 * (0.5 * #{$fontsizeFallback2}));
-    width: calc(1.3 * (0.5 * #{$fontsize2}));
-    margin-right: 0.5vw;
-    border-radius: 50%;
-    transition: 0.5s;
-}
-
-.program-about-wrapper {
-    display: flex;
-    align-items: center;
-}
-
-.menu-item:hover {
-    text-decoration: underline 1px;
-}
-
-.menu-item:hover .circle {
-    background-color: rgb(0, 255, 0);
-}
-
-.menu-item.active {
-    text-decoration: underline 1px;
-}
-
-.menu-item.active .circle {
-    background-color: rgb(0, 255, 0);
 }
 
 //////////////////////////////////////////////////////// Programa
@@ -476,152 +263,6 @@ nav {
         font-size: $fontsize2;
         line-height: $lineheight2;
     }
-    .info-container {
-        grid-template-rows: auto auto auto auto auto;
-    }
-    #info-container-1.info-container h1 img {
-        height: calc(0.75 * (0.5 * #{$fontsizeFallback3}));
-        height: calc(0.75 * (0.5 * #{$fontsize3}));
-    }
-    #info-container-1.info-container h1,
-    #info-container-1.info-container .slogan h2,
-    #info-container-1.info-container .time-local-container {
-        @include typesize1;
-    }
-    #info-container-1.info-container .slogan h2 {
-        @include typesize2;
-    }
-    #info-container-1.info-container h1 img {
-        height: calc(0.75 * (1 * #{$fontsizeFallback3}));
-        height: calc(0.75 * (1 * #{$fontsize3}));
-    }
-    .windows-container-1 .window {
-        display: none;
-    }
-    .windows-container-2 {
-        display: grid;
-        grid-column: 1 / 6;
-        grid-row: 2 / 3;
-        justify-content: center;
-        align-items: center;
-        align-content: center;
-    }
-    .windows-container-2 .window {
-        height: 80vw;
-        width: 80vw;
-        opacity: 1;
-    }
-    #window-1 {
-        grid-column: 1 / 6;
-        grid-row: 2 / 3;
-        place-self: center;
-        display: none;
-    }
-    #window-2 {
-        grid-column: 1 / 6;
-        grid-row: 5 / 6;
-    }
-    .slogan {
-        grid-column: 1 / 6;
-        grid-row: 3 / 4;
-    }
-    .time-local-container {
-        grid-column: 1 / 6;
-        grid-row: 4 / 5;
-    }
-    .windows-container-line {
-        grid-column: 1 / 6;
-        grid-row: 2 / 3;
-        border-style: solid;
-        border-width: 1px;
-        border-right: 0;
-        border-left: 0;
-        border-color: rgb(0, 255, 0);
-    }
-    .local-container {
-        @include typesize2;
-    }
-    .time-container {
-        @include typesize2;
-    }
-    .p-container {
-        @include typesize2;
-    }
-    .mc-field-group input {
-        @include typesize2;
-    }
-    .optionalParent input {
-        @include typesize2;
-        border-radius: 0px;
-    }
-    .p-container p:nth-child(1) {
-        grid-column: 1 / 3;
-    }
-    .p-container p:nth-child(2) {
-        grid-column: 1 /3;
-    }
-    .local-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    //////////////////////////////////////////////////////// FOOTER
-    ///////////////////////// Social/Newsletter
-    .social-newsletter-container {
-        flex-direction: column;
-    }
-    ////// Newsletter
-    .newsletter {
-        padding: 0;
-        padding-top: 2vw;
-        padding-bottom: 2vw;
-        width: 100%;
-        border-left: none;
-        border-bottom: solid rgb(0, 255, 0) 1px;
-    }
-    .newsletter h2 {
-        @include typesize2;
-        margin-left: 1vw;
-    }
-    .newsletter a {
-        @include typesize2;
-        margin-right: 1vw;
-        padding: 1vw;
-        padding-left: 2vw;
-        padding-right: 2vw;
-        border-radius: 4vw;
-    }
-    ////// Social
-    .social {
-        width: 100%;
-        padding: 0;
-        padding-top: 2vw;
-        padding-bottom: 2vw;
-        border-bottom: solid rgb(0, 255, 0) 1px;
-    }
-    .social a {
-        @include typesize2;
-        margin-right: 1vw;
-        margin-left: 1vw;
-    }
-    ///////////////////////// Logos
-    .logo-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        padding-top: 1%;
-        padding-bottom: 6%;
-        border-top: none;
-    }
-    #starts,
-    #artshare,
-    #factory,
-    #hub,
-    .logo-container a {
-        grid-row: auto;
-    }
-    .social-newsletter-container {
-        border-bottom: none
-    }
     //////////////////////////////////////////////////////// MENU
     .menu-container a,
     #artshare-title,
@@ -647,9 +288,6 @@ nav {
     .program-nav-wrapper {
         padding-top: 2vw;
         padding-bottom: 2vw;
-    }
-    #program {
-        margin-right: 4vw;
     }
     .circle {
         height: calc(1.3 * (0.5 * #{$fontsizeFallback2}));
