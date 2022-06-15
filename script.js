@@ -92,7 +92,7 @@ if (window.location.pathname == 'index.html') {
     // Fetch data
     getData();
     async function getData() {
-        const response = await fetch('/data.json');
+        const response = await fetch('data.json');
         const data = await response.json();
         showList(data);
     }
