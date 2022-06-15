@@ -84,9 +84,9 @@ var offsetHeight = document.getElementById('menu-nav').offsetHeight;
 
 
 
-if (window.location.pathname == 'index.html') {
+if (window.location.pathname == '/index.html') {
     document.querySelector(".info-container").style.marginTop = offsetHeight + "px";
-} else if (window.location.pathname == 'program.html') {
+} else if (window.location.pathname == '/program.html') {
     document.getElementById("program-wrapper").style.marginTop = offsetHeight + "px";
 
     // Fetch data
@@ -324,9 +324,9 @@ if (window.location.pathname == 'index.html') {
     }
 
 
-} else if (window.location.pathname == 'concept.html') {
+} else if (window.location.pathname == '/concept.html') {
     document.querySelector(".info-container").style.marginTop = offsetHeight + "px";
-} else if (window.location.pathname == 'tickets.html') {
+} else if (window.location.pathname == '/tickets.html') {
     document.querySelector(".info-container").style.marginTop = offsetHeight + "px";
 };
 
